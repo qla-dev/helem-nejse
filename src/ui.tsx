@@ -184,7 +184,7 @@ export function Partnership({ className }: { className?: string }) {
 
 export function Nav({ route }: { route: string }) {
   return (
-    <nav className="sticky top-0 z-50 bg-hn-orange/85 backdrop-blur-md border-b-2 border-hn-ink print:hidden">
+    <nav className="sticky top-0 z-50 bg-hn-orange pt-[env(safe-area-inset-top)] border-b-2 border-hn-ink print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center gap-3 sm:gap-5">
         <a href={link('/')} className="flex items-center gap-3 shrink-0" aria-label="Početna">
           <img src={img('helem-nejse-logo.svg')} alt="Helem Nejse" className="w-10 h-10 sm:w-11 sm:h-11 spin-slow" />

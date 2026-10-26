@@ -14,7 +14,7 @@
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: var(--color-hn-orange); }
   body {
     background: var(--color-hn-orange);
     color: var(--color-hn-ink);
