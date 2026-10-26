@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ArrowUpRight, Printer } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
@@ -183,8 +183,21 @@ export function Partnership({ className }: { className?: string }) {
 }
 
 export function Nav({ route }: { route: string }) {
+  // iOS Safari tints the status bar from a solid fixed header touching the top edge,
+  // so the nav is fixed and a spacer of the same height keeps the content below it.
+  const ref = useRef<HTMLElement>(null);
+  const [height, setHeight] = useState(0);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setHeight(el.offsetHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
-    <nav className="sticky top-0 z-50 bg-hn-orange pt-[env(safe-area-inset-top)] border-b-2 border-hn-ink print:hidden">
+    <>
+    <div aria-hidden style={{ height }} className="print:hidden" />
+    <nav ref={ref} className="fixed top-0 inset-x-0 z-50 bg-hn-orange pt-[env(safe-area-inset-top)] border-b-2 border-hn-ink print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center gap-3 sm:gap-5">
         <a href={link('/')} className="flex items-center gap-3 shrink-0" aria-label="Početna">
           <img src={img('helem-nejse-logo.svg')} alt="Helem Nejse" className="w-10 h-10 sm:w-11 sm:h-11 spin-slow" />
@@ -231,6 +244,7 @@ export function Nav({ route }: { route: string }) {
         ))}
       </div>
     </nav>
+    </>
   );
 }
 
