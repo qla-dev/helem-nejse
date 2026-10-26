@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowRight, ArrowUpRight, Gamepad2, Smartphone, Sparkles, Users, Rocket, Hammer, Lightbulb } from 'lucide-react';
 import { GAMES, PLATFORMS, img } from './data';
-import { Eyebrow, Partnership, Reveal, Sticker, Ticker, scrollToId } from './ui';
+import { Eyebrow, Partnership, Reveal, Sticker, Ticker, scrollToId, link } from './ui';
 
 export default function Home() {
   return (
@@ -44,7 +44,7 @@ export default function Home() {
               {GAMES.map((g, i) => (
                 <a
                   key={g.id}
-                  href={`/igra/${g.id}`}
+                  href={link(`/igra/${g.id}`)}
                   style={{ rotate: `${[-2.5, 2, 1.5, -2][i]}deg` }}
                   className="brutal brutal-hover block rounded-2xl overflow-hidden bg-hn-ink"
                 >
@@ -87,7 +87,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             {GAMES.map((g, i) => (
               <Reveal key={g.id} delay={i * 0.06}>
-                <a href={`/igra/${g.id}`} className="brutal brutal-hover group block rounded-[2rem] overflow-hidden bg-white h-full">
+                <a href={link(`/igra/${g.id}`)} className="brutal brutal-hover group block rounded-[2rem] overflow-hidden bg-white h-full">
                   <div className="relative">
                     <img src={img(`cover-${g.id}.webp`)} alt={`${g.title}: naslovni vizual`} loading="lazy" className="w-full aspect-[16/9] object-cover" />
                     <span className="absolute top-4 left-4 font-display text-5xl sm:text-6xl hollow-cream drop-shadow">{g.n}</span>
@@ -137,7 +137,7 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {GAMES.map((g, i) => (
               <Reveal key={g.id} delay={i * 0.06}>
-                <a href={`/igra/${g.id}`} className="block rounded-2xl overflow-hidden border-2 border-white/15 hover:border-rb-yellow transition-colors">
+                <a href={link(`/igra/${g.id}`)} className="block rounded-2xl overflow-hidden border-2 border-white/15 hover:border-rb-yellow transition-colors">
                   <img src={img(`cover-${g.id}-v2-redbull.webp`)} alt={`${g.title}: Red Bull varijanta`} loading="lazy" className="w-full aspect-[16/10] object-cover" />
                   <div className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider bg-white/5">{g.redbull.items[0][0]}</div>
                 </a>

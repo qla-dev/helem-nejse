@@ -11,6 +11,10 @@ export function cn(...inputs: ClassValue[]) {
 
 const NAV_EVENT = 'app:navigate';
 
+// Deployed under https://qla.dev/helem-nejse, so app routes live below the Vite base.
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+export const link = (path: string) => BASE + path;
+
 export const go = (path: string) => {
   if (path === window.location.pathname) return;
   window.history.pushState(null, '', path);
@@ -19,7 +23,7 @@ export const go = (path: string) => {
 };
 
 export function useRoute() {
-  const read = () => window.location.pathname.replace(/\/+$/, '') || '/';
+  const read = () => window.location.pathname.slice(BASE.length).replace(/\/+$/, '') || '/';
   const [route, setRoute] = useState(read);
   useEffect(() => {
     const sync = () => setRoute(read());
@@ -28,7 +32,7 @@ export function useRoute() {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const a = (e.target as HTMLElement).closest('a');
       const href = a?.getAttribute('href');
-      if (!a || !href || !href.startsWith('/') || a.target) return;
+      if (!a || !href || !href.startsWith(BASE + '/') || a.target) return;
       e.preventDefault();
       go(href);
     };
@@ -182,7 +186,7 @@ export function Nav({ route }: { route: string }) {
   return (
     <nav className="sticky top-0 z-50 bg-hn-orange/85 backdrop-blur-md border-b-2 border-hn-ink print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center gap-3 sm:gap-5">
-        <a href="/" className="flex items-center gap-3 shrink-0" aria-label="Početna">
+        <a href={link('/')} className="flex items-center gap-3 shrink-0" aria-label="Početna">
           <img src={img('helem-nejse-logo.svg')} alt="Helem Nejse" className="w-10 h-10 sm:w-11 sm:h-11 spin-slow" />
           <span className="font-display text-lg leading-none">×</span>
           <img src={img('qla-logo-white.png')} alt="qla.dev" className="h-5 sm:h-6 object-contain" />
@@ -193,7 +197,7 @@ export function Nav({ route }: { route: string }) {
             return (
               <a
                 key={g.id}
-                href={`/igra/${g.id}`}
+                href={link(`/igra/${g.id}`)}
                 className={cn(
                   'px-3 py-2 rounded-full text-[13px] font-bold transition-colors border-2',
                   active ? 'bg-hn-ink text-hn-orange border-hn-ink' : 'border-transparent hover:border-hn-ink'
@@ -216,7 +220,7 @@ export function Nav({ route }: { route: string }) {
         {GAMES.map((g) => (
           <a
             key={g.id}
-            href={`/igra/${g.id}`}
+            href={link(`/igra/${g.id}`)}
             className={cn(
               'shrink-0 px-3 py-1.5 rounded-full text-xs font-bold border-2 border-hn-ink',
               route === `/igra/${g.id}` ? 'bg-hn-ink text-hn-orange' : 'bg-hn-cream/40'
@@ -241,7 +245,7 @@ export function Footer() {
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
             {GAMES.map((g) => (
-              <a key={g.id} href={`/igra/${g.id}`} className="px-3 py-1.5 rounded-full border border-hn-cream/30 text-xs font-bold hover:bg-hn-cream hover:text-hn-ink transition-colors flex items-center gap-1">
+              <a key={g.id} href={link(`/igra/${g.id}`)} className="px-3 py-1.5 rounded-full border border-hn-cream/30 text-xs font-bold hover:bg-hn-cream hover:text-hn-ink transition-colors flex items-center gap-1">
                 {g.title} <ArrowUpRight className="w-3 h-3" />
               </a>
             ))}

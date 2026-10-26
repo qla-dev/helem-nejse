@@ -13,10 +13,16 @@ Model: bez investicije, prihod se dijeli 55% Helem Nejse / 45% qla.dev.
 
 ```bash
 npm install
-npm run dev      # http://localhost:5177
+npm run dev      # http://localhost:5177/helem-nejse/
 npm run build    # statički sajt u dist/
 ```
 
-Rute koriste History API, pa hosting mora sve putanje preusmjeriti na `index.html`.
+## Deploy
+
+Sajt se servira s `https://qla.dev/helem-nejse` (isti server kao `qla.dev/hideya`). `dist/` je commitovan: nakon izmjena pokreni `npm run build` i commituj `dist/`.
+
+Na serveru je klon ovog repoa. Redeploy je samo `git pull --ff-only` kroz `redeploy.php`. `deploy.htaccess` se pri buildu kopira u `dist/.htaccess`: postojeći fajlovi se serviraju direktno, a sve ostale putanje (`/igra/...`) otvaraju React aplikaciju.
+
+Share cover za Open Graph i Twitter je `public/og-cover.jpg` (1200 × 630).
 
 Sadržaj igara je u `src/data.ts`. Vizuali su konceptualne simulacije. BBBB likovi i svijet pripadaju Helem Nejse; Red Bull je zaštitni znak vlasnika i prikazan je samo kao opcija sponzorstva. Mape: © OpenStreetMap contributors.

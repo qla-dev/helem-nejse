@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, Clock, ExternalLink, Flame, Hand, Map, Package, Sparkles, Timer, TriangleAlert, Trophy, TrendingUp, Users, Zap } from 'lucide-react';
 import { GAMES, type Entry, type Game, type View, img, pub } from './data';
-import { Eyebrow, Partnership, Reveal, SHARE, Sticker, Ticker, cn, scrollToId, useZoom } from './ui';
+import { Eyebrow, Partnership, Reveal, SHARE, Sticker, Ticker, cn, scrollToId, useZoom, link } from './ui';
 
 /* Phone mockups are transparent cutouts: no border, no rounding, only a soft shadow. */
 function Shot({ view, alt, className }: { view: View; alt: string; className?: string }) {
@@ -120,7 +120,7 @@ export default function GamePage({ game }: { game: Game }) {
       {/* Hero */}
       <section className="px-4 sm:px-6 pt-8 sm:pt-14 pb-16 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <a href="/" className="inline-flex items-center gap-2 text-sm font-bold mb-8 hover:gap-3 transition-all">
+          <a href={link('/')} className="inline-flex items-center gap-2 text-sm font-bold mb-8 hover:gap-3 transition-all">
             <ArrowLeft className="w-4 h-4" /> Svi scenariji
           </a>
           <div className="grid lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-14 items-center">
@@ -443,7 +443,7 @@ export default function GamePage({ game }: { game: Game }) {
       {/* Prev / next */}
       <section className="grid sm:grid-cols-2 border-t-2 border-hn-ink">
         {[prev, next].map((g, i) => (
-          <a key={g.id} href={`/igra/${g.id}`} className={cn('group relative overflow-hidden px-6 py-10 sm:py-14 flex items-center gap-5', i === 0 ? 'bg-hn-yellow sm:border-r-2 border-hn-ink' : 'bg-hn-cream justify-end text-right')}>
+          <a key={g.id} href={link(`/igra/${g.id}`)} className={cn('group relative overflow-hidden px-6 py-10 sm:py-14 flex items-center gap-5', i === 0 ? 'bg-hn-yellow sm:border-r-2 border-hn-ink' : 'bg-hn-cream justify-end text-right')}>
             {i === 0 && <ArrowLeft className="w-7 h-7 shrink-0 group-hover:-translate-x-1 transition-transform" />}
             <div>
               <p className="text-xs font-bold uppercase tracking-widest opacity-60">{i === 0 ? 'Prethodni scenarij' : 'Sljedeći scenarij'} · {g.n}</p>
