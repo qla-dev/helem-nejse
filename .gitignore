@@ -1,0 +1,4 @@
+node_modules
+dist
+# Raw working material (original PNGs, PDF, ZIP, prompts, tools) stays local.
+izvor
