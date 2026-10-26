@@ -2,12 +2,15 @@ Options -Indexes
 DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Served from dist/ as https://qla.dev/helem-nejse, so match files relative
-  # to this directory, not DOCUMENT_ROOT.
+  # Served from dist/helem-nejse/web/dist as https://qla.dev/helem-nejse (the
+  # qla.dev root .htaccess maps it), so match files relative to this
+  # directory, not DOCUMENT_ROOT.
   # Real files and folders (assets/, img/, maps/, og-cover.jpg) load as they are.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
+  # A missing file (anything with an extension) is a real 404, not the app.
+  RewriteRule \.[A-Za-z0-9]{2,5}$ - [R=404,L]
   # Every other path (/igra/kart, /igra/tram, ...) opens the React app.
   RewriteRule ^ index.html [L]
 </IfModule>
