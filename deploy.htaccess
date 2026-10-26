@@ -2,7 +2,7 @@ Options -Indexes
 DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Served from dist/helem-nejse/web/dist as https://qla.dev/helem-nejse (the
+  # Served from dist/helem-nejse/dist as https://qla.dev/helem-nejse (the
   # qla.dev root .htaccess maps it), so match files relative to this
   # directory, not DOCUMENT_ROOT.
   # Real files and folders (assets/, img/, maps/, og-cover.jpg) load as they are.

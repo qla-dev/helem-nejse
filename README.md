@@ -21,7 +21,7 @@ npm run build    # statički sajt u dist/
 
 Sajt se servira s `https://qla.dev/helem-nejse` (isti server kao `qla.dev/hideya`). `dist/` je commitovan: nakon izmjena pokreni `npm run build` i commituj `dist/`.
 
-Na qla.dev serveru je ovaj repo kloniran u `dist/helem-nejse/web` (pored `dist/hideya/web`), a root `.htaccess` iz repoa `qla-dev/qladev` mapira `/helem-nejse/*` na `dist/helem-nejse/web/dist/` i `/helem-nejse/redeploy.php` na skriptu ovdje. Redeploy (`https://qla.dev/helem-nejse/redeploy.php`) je samo `git pull --ff-only` kroz `redeploy.php`. `deploy.htaccess` se pri buildu kopira u `dist/.htaccess`: postojeći fajlovi se serviraju direktno, a sve ostale putanje (`/igra/...`) otvaraju React aplikaciju.
+Na qla.dev serveru je ovaj repo kloniran u `dist/helem-nejse`, a root `.htaccess` iz repoa `qla-dev/qladev` mapira `/helem-nejse/*` na `dist/helem-nejse/dist/` i `/helem-nejse/redeploy.php` na skriptu ovdje. Redeploy (`https://qla.dev/helem-nejse/redeploy.php`) je samo `git pull --ff-only` kroz `redeploy.php`. `deploy.htaccess` se pri buildu kopira u `dist/.htaccess`: postojeći fajlovi se serviraju direktno, a sve ostale putanje (`/igra/...`) otvaraju React aplikaciju.
 
 Share cover za Open Graph i Twitter je `public/og-cover.jpg` (1200 × 630).
 
